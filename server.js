@@ -11,8 +11,12 @@ app.use(cors());
 const PORT = process.env.PORT;
 
 app.get('/location', (req, res) => {
-  const locationData = searchToLatLong(req.query);
-  res.send(locationData);
+  if (!verifyLocation(req.query)) {
+    res.status(500).send('Invalid Location');
+  } else { 
+    const locationData = searchToLatLong(req.query);
+    res.send(locationData);
+  }
 });
 
 app.get('/weather', (req, res) => {
@@ -56,4 +60,11 @@ function searchToDailyForecast(query) {
 function Forecast(forecast, time) {
   this.forecast = forecast;
   this.time = time;
+}
+
+function verifyLocation(query) {
+  if (query.data.length !== 0) {
+    return true;
+  }
+  return false;
 }
