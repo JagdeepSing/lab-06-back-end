@@ -15,6 +15,11 @@ app.get('/location', (req, res) => {
   res.send(locationData);
 });
 
+app.get('/weather', (req, res) => {
+  const forecastData = searchToDailyForecast(req.query);
+  res.send(forecastData);
+});
+
 app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 
 // HELPER FUNCTIONS
@@ -31,4 +36,24 @@ function Location(data, query) {
   this.formatted_query = data.results[0].formatted_address;
   this.latitude = data.results[0].geometry.location.lat;
   this.longitude = data.results[0].geometry.location.lng;
+}
+
+function searchToDailyForecast(query) {
+  const weatherData = require('./data/darksky.json');
+  const dailyForecast = weatherData.daily.data;
+  let result = [];
+  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  dailyForecast.forEach(day => {
+    let time = new Date(day.time);
+    let formattedTime = `${days[time.getDay()]} ${months[time.getMonth()]} ${time.getDate()} ${time.getFullYear()}`;
+    const forecast = new Forecast(day.summary, formattedTime);
+    result.push(forecast);
+  });
+  return result;
+}
+
+function Forecast(forecast, time) {
+  this.forecast = forecast;
+  this.time = time;
 }
