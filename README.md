@@ -12,10 +12,14 @@ This site is being built so that we can get hands on experience with backend sys
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+Location-route
 step 1: Copy base code from our Repo.
 step 2: In terminal window 'npm install dotenv' and create '.env' file containing PORT='port number you use'.
 step 3: Run nodemon and test routes (location) and outputs.
 step 4: deploy if desired.
+
+Weather route
+
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
@@ -52,6 +56,17 @@ Estimate of time needed to complete: 1 hour
 
 Start time: 10am
 
-Finish time: 
+Finish time: 11:15am
 
-Actual time needed to complete: _____
+Actual time needed to complete: 1:15 minutes
+
+
+Number and name of feature: Errors
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 11:15am
+
+Finish time: 12:20pm
+
+Actual time needed to complete: 1:05 minutes
