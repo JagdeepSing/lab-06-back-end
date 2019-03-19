@@ -10,8 +10,10 @@ app.use(cors());
 
 const PORT = process.env.PORT;
 
+// location route, returns location object
+// Keys: search_query, formatted_query, latitude and longitude
 app.get('/location', (req, res) => {
-  if (!verifyLocation(req.query)) {
+  if (req.query.data.length === 0) {
     res.status(500).send('Invalid Location');
   } else { 
     const locationData = searchToLatLong(req.query);
@@ -19,6 +21,8 @@ app.get('/location', (req, res) => {
   }
 });
 
+// weather route, returns an array of forecast objects
+// Keys: forecast, time
 app.get('/weather', (req, res) => {
   const forecastData = searchToDailyForecast(req.query);
   res.send(forecastData);
@@ -28,13 +32,14 @@ app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 
 // HELPER FUNCTIONS
 
-// takes search request and convert to lat and long
+// takes search request and convert to location object
 function searchToLatLong(query) {
   const geoData = require('./data/geo.json');
   const location = new Location(geoData, Object.values(query)[0]);
   return location;
 }
 
+// Location object constructor
 function Location(data, query) {
   this.search_query = query;
   this.formatted_query = data.results[0].formatted_address;
@@ -42,6 +47,7 @@ function Location(data, query) {
   this.longitude = data.results[0].geometry.location.lng;
 }
 
+// returns array of daily forecasts
 function searchToDailyForecast(query) {
   const weatherData = require('./data/darksky.json');
   const dailyForecast = weatherData.daily.data;
@@ -57,14 +63,8 @@ function searchToDailyForecast(query) {
   return result;
 }
 
+// Forecast object constructor
 function Forecast(forecast, time) {
   this.forecast = forecast;
   this.time = time;
-}
-
-function verifyLocation(query) {
-  if (query.data.length !== 0) {
-    return true;
-  }
-  return false;
 }
