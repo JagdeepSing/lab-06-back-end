@@ -11,10 +11,7 @@ app.use(cors());
 const PORT = process.env.PORT;
 
 app.get('/location', (req, res) => {
-  const locationData = searchToLatLong(request.query.data);
-  console.log(req);
-  console.log(req.query);
-  console.log(request.query.data);
+  const locationData = searchToLatLong(req.query);
   res.send(locationData);
 });
 
@@ -24,15 +21,14 @@ app.listen(PORT, () => console.log(`Listening on PORT ${PORT}`));
 
 // takes search request and convert to lat and long
 function searchToLatLong(query) {
-  const geoData = require('.data/geo.json');
-  const location = new Location(geoData);
-  location.search_query = query;
-  console.log(location);
+  const geoData = require('./data/geo.json');
+  const location = new Location(geoData, Object.values(query)[0]);
   return location;
 }
 
-function Location(data) {
+function Location(data, query) {
+  this.search_query = query;
   this.formatted_query = data.results[0].formatted_address;
   this.latitude = data.results[0].geometry.location.lat;
-  this.longitude = data.results[0].geometry.location.long;
+  this.longitude = data.results[0].geometry.location.lng;
 }
