@@ -12,10 +12,14 @@ This site is being built so that we can get hands on experience with backend sys
 
 ## Getting Started
 <!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+step 1: Copy base code from our Repo.
+step 2: In terminal window 'npm install dotenv' and create '.env' file containing PORT='port number you use'.
+step 3: Run nodemon and test routes (location) and outputs.
+step 4: deploy if desired.
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
-Langauges currently in use include, JavaScript, CSS, and HTML.
+Langauges currently in use include, JavaScript, node, express, dotEnv, JSON, CORS.
 
 
 
@@ -28,3 +32,26 @@ Langauges currently in use include, JavaScript, CSS, and HTML.
 
 -->
 Credit should be given to CodeFellows for providing all of the frontend javascript, html, and CSS. CodeFellows also gave guidance on the creation of the backend portion.
+
+
+
+Number and name of feature: Locations
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 9am
+
+Finish time: 10am
+
+Actual time needed to complete: 1 hour
+
+
+Number and name of feature: Weather
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 10am
+
+Finish time: 
+
+Actual time needed to complete: _____
