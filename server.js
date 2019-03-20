@@ -52,7 +52,7 @@ function getWeather(req, res) {
   
   return superagent.get(dark_sky_url)
     .then( weatherResult => {
-      const weatherSummaries = weatherResult.body.daily.data.map((day,i) => {
+      const weatherSummaries = weatherResult.body.daily.data.map((day) => {
         return new Forecast(day);
       });
       res.send(weatherSummaries);
